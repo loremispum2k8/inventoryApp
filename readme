@@ -1,0 +1,33 @@
+views (view category, view items)
+routes
+controllers
+forms ( with authentification )
+CRUD behavior ( Create, Read, Update ,Delete)
+
+
+Views === (go inside) ===> Control;ers
+Controllers === (go inside) ===> Routes
+Routes ===> (go inside) ===> App
+
+
+////////
+
+
+
+CREATE TABLE IF NOT EXISTS categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    cat_date DATE,
+    cat_time TIME
+);
+
+CREATE TABLE IF NOT EXISTS items (
+    id SERIAL PRIMARY KEY,
+	url VARCHAR(255),
+    name VARCHAR(255),
+    item_date DATE,
+    item_time TIME,
+	category_id INTEGER NOT NULL,
+	FOREIGN KEY(category_id) REFERENCES categories(id)
+);
+INSERT INTO items (name,url,category_id,item_date,item_time) VALUES('Audi','https://example.com/image1',1,'2026-01-16','18:55');

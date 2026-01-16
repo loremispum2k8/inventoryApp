@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <p>Here are all the categories</p>
+    <form method="post" action="/addCategory">
+        <label for="category">Category name:</label>
+        <input type="text" id="category" name="category">
+        <button type="submit">Create Category</button>
+    </form>
+    <div class="categories">
+        <%categories.map(category=>{%>
+            <a href=<%=category.id %>><%=category.name%></a>
+        <%})%>
+    </div>
+</body>
+</html>
