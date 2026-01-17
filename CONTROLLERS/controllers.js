@@ -5,7 +5,7 @@ const validateCategory = [
     body('category')
         .trim()
         .notEmpty()
-        .withMessage('Category name cannot be empty')
+        .withMessage('Category name cannot be empty'),
 ]
 
 async function generateHomePage(req,res){
@@ -24,7 +24,6 @@ async function addCategory(req,res){
         await db.addCategory(req.body.category)
         res.redirect('/')
     }else{
-        console.log(errors.errors[0].msg)
         res.render('index',{msg:errors.errors[0].msg,categories})
     }
 }
@@ -34,11 +33,29 @@ async function deleteCategory(req,res){
     res.redirect('/')
 }
 
-async function viewCategory(req,res){
+async function viewEditCategory(req,res){
     const {id} = req.params
     const [category] = await db.getIndividualCategory(id)
     console.log(category)
-    res.render('category',{category})
+    res.render('update',{category})
+}
+
+async function editCategory(req,res){
+    await db.editCategory(req.body.newName, req.params.id)
+    res.redirect('/')
+}
+
+async function viewCategory(req,res){
+    const {id} = req.params
+    const [category] = await db.getIndividualCategory(id)
+    const rows = await db.getItems(id)
+    res.render('category',{category,rows})
+}
+
+async function addItem(req,res){
+    const {id} = req.params
+    await db.addItem(req.body.item,req.body.url,id)
+    res.redirect(`/${id}`)
 }
 
 
@@ -48,5 +65,8 @@ module.exports = {
     viewCategory,
     addCategory,
     generateHomePage,
-    deleteCategory
+    deleteCategory,
+    viewEditCategory,
+    editCategory,
+    addItem,
 }

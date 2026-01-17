@@ -6,6 +6,7 @@
     <title>Home</title>
 </head>
 <body>
+    <a href="/">Home</a>
     <p>Here are all the categories</p>
     <form method="post" action="/addCategory">
         <label for="category">Category name:</label>
@@ -18,6 +19,7 @@
             <div>
                 <a href=<%=category.id %>><%=category.name%></a>
                 <a href=<%='/delete/' + category.id %>>Delete</a>
+                <a href=<%='/edit/' + category.id %>>Edit</a>
             </div>
         <%})%>
     </div>
