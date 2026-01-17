@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Category ID <%=category.id%></h1>
+    <h1><%=category.name%></h1>
+    <p><%=category.cat_date.toLocaleDateString('en-US',{month:'long', day:'numeric', weekday:'long', day:'numeric', year:'numeric'})%></p>
+    <p><%=category.cat_time%></p>
 </body>
 </html>
