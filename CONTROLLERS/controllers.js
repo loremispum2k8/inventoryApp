@@ -1,7 +1,5 @@
 const db = require('../DATABASE/queries')
-require('dotenv').config()
 const { body, validationResult } = require('express-validator');
-const { param } = require('../ROUTES');
 const validateCategory = [
     body('category')
         .trim()
@@ -10,12 +8,8 @@ const validateCategory = [
 ]
 
 async function generateHomePage(req,res){
-    if(process.env.ISVALIDATED == 'True'){
-            const categories = await db.getCategories()
-            res.render('index',{categories,msg:''})
-    }else{
-            res.send('invalid')
-    }
+    const categories = await db.getCategories()
+    res.render('index',{categories,msg:''})
 }
 
 async function addCategory(req,res){
