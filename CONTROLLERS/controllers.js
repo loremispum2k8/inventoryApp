@@ -1,6 +1,7 @@
 const db = require('../DATABASE/queries')
 require('dotenv').config()
 const { body, validationResult } = require('express-validator');
+const { param } = require('../ROUTES');
 const validateCategory = [
     body('category')
         .trim()
@@ -36,7 +37,6 @@ async function deleteCategory(req,res){
 async function viewEditCategory(req,res){
     const {id} = req.params
     const [category] = await db.getIndividualCategory(id)
-    console.log(category)
     res.render('update',{category})
 }
 
@@ -52,12 +52,29 @@ async function viewCategory(req,res){
     res.render('category',{category,rows})
 }
 
+async function viewEditItem(req,res){
+    console.log(req.params)
+    const [category] = await db.getIndividualCategory(req.params.id)
+    const [row] = await db.getIndividualItem(req.params.itemId)
+    console.log(row.name)
+    res.render('updateItem',{category,row})
+}
+
 async function addItem(req,res){
     const {id} = req.params
     await db.addItem(req.body.item,req.body.url,id)
     res.redirect(`/${id}`)
 }
 
+async function removeItem(req,res){
+    db.removeItem(req.params.itemId)
+    res.redirect(`/${req.params.id}`)
+}
+
+async function editItem(req,res){
+    await db.editItem(req.body.newName, req.body.newUrl, req.params.itemId)
+    res.redirect(`/${req.params.id}`)
+}
 
 module.exports = {
     validateCategory,
@@ -69,4 +86,7 @@ module.exports = {
     viewEditCategory,
     editCategory,
     addItem,
+    viewEditItem,
+    removeItem,
+    editItem
 }

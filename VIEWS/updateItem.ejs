@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update <%=row.name%></title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <form method="post" action="/<%=category.id%>/edit/<%=row.id%>">
+        <label for="editName">Item name:</label>
+        <input type="text" id="editName" name="newName" value="<%=row.name%>">
+        <label for="editUrl">URL:</label>
+        <input type="text" id="editUrl" name="newUrl" value="<%=row.url%>">
+        <button type="submit">Edit</button>
+    </form>
+</body>
+</html>

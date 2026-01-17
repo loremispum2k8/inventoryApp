@@ -10,6 +10,11 @@ async function getIndividualCategory(categoryId){
     return rows
 }
 
+async function getIndividualItem(itemId){
+    const {rows} = await pool.query(`SELECT * FROM items WHERE id = $1`,[itemId])
+    return rows
+}
+
 async function addCategory(categoryName){
     let date = new Date()
         
@@ -28,7 +33,11 @@ async function deleteCategory(categoryId){
 }
 
 async function editCategory(categoryName,categoryId){
-    await pool.query(`UPDATE categories SET name = $1 WHERE id = $2`,[categoryName,categoryId])
+    await pool.query('UPDATE categories SET name = $1 WHERE id = $2',[categoryName,categoryId])
+}
+
+async function editItem(itemName,itemUrl,itemId){
+    await pool.query('UPDATE items SET name = $1, url = $2 WHERE id = $3',[itemName,itemUrl,itemId])
 }
 
 async function addItem(fileName,fileUrl,categoryId){
@@ -47,6 +56,10 @@ async function getItems(categoryId){
     return rows
 }
 
+async function removeItem(itemId){
+    await pool.query(`DELETE FROM items WHERE id = $1`,[itemId])
+}
+
 module.exports = {
     getIndividualCategory,
     getCategories,
@@ -54,5 +67,8 @@ module.exports = {
     deleteCategory,
     editCategory,
     addItem,
-    getItems
+    getItems,
+    getIndividualItem,
+    removeItem,
+    editItem
 }
