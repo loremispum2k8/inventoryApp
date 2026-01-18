@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('parts/head') %>
+</head>
+<body>
+    <div class="innerBody">
+        
+        <div class="topRow">
+            <div class="topRowLeft">
+                <p class="pageTitle">Categories</p>
+                <a class="homeLink" href="/">Home</a>
+            </div>
+            <div class="searchBar"></div>
+        </div>
+        
+        <form method="post" action="/edit/<%=category.id%>">
+            <label for="editName">Category name:</label>
+            <input type="text" id="editName" name="newName" value=<%= category.name %>>
+            <button type="submit">Edit</button>
+            <p><%=category.cat_date.toLocaleDateString('en-US',{month:'long', day:'numeric', weekday:'long', year:'numeric'})%></p>
+            <p><%=category.cat_time%></p>
+            <a href=<%='/delete/' + category.id %>>Delete</a>
+        </form>
+    </div>
+</body>
+</html>

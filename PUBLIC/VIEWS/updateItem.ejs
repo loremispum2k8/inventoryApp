@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update <%=row.name%></title>
+    <%-include('parts/head') %>
 </head>
 <body>
     <a href="/">Home</a>
@@ -13,6 +11,9 @@
         <label for="editUrl">URL:</label>
         <input type="text" id="editUrl" name="newUrl" value="<%=row.url%>">
         <button type="submit">Edit</button>
+        <a href=<%=category.id+'/delete/'+row.id%>>Delete</a>
     </form>
+    <p><%=row.item_date.toLocaleDateString('en-US',{month:'long', day:'numeric', weekday:'long', year:'numeric'})%></p>
+    <p><%=row.item_time%></p>
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('parts/head') %>
+</head>
+<body>
+    <form class="postItem" method="post" action="<%=category.id%>">
+        <div>
+            <label for="item">Item name:
+            <input type="text" id="item" name="item" required>
+        </div>
+        <div>
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url">
+        </div>
+        <button type="submit">Create Item</button>
+    </form>
+
+
+    <div class="innerBody">
+
+        <div class="topRow">
+            <div class="topRowLeft">
+                <p class="pageTitle"><%=category.name%></p>
+                <a class="homeLink" href="/">Home</a>
+            </div>
+            <div class="searchBar"></div>
+        </div>
+
+    <div class="items">
+        <%rows.map(row=>{%>
+            <div class="item">
+                <div class="itemImageContainer">
+                    <img class="itemImage" src=<%=row.url%> alt="image">
+                </div>
+                <div class="itemText">
+                    <p class="itemName"><%=row.name%></p>
+                    <a href=<%=category.id+'/edit/'+row.id%>>
+                        <img class="dots" src="dots.png">
+                    </a>
+                </div>
+            </div>
+        <%})%>
+        <div class="addItem">
+            <div class="addCategoryImgDiv">
+                <img class="addCategoryImg" src="add.png">
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

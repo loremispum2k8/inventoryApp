@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('parts/head') %>
+    <script src="../browser.js"></script>
+</head>
+<body>
+
+    <div class="addCategoryForm">
+        <div class="background"></div>
+        <form class="categoryForm" method="post" action="/addCategory">
+            <div class="categoryEmblem">
+                <div class="addCategoryImgDiv">
+                    <img class="smallerIcon" src="folder.png">
+                </div>
+            </div>
+            <p class="popupTitle">New Category</p>
+            <p class="popupInfo">Create a new category to store items</p>
+            <div class="popupLine"></div>
+            <div class="popupInput">
+                <div class="popupEdit">
+                    <img src="inputedit.png">
+                </div>
+                <input type="text" id="category" name="category" placeholder="Category name" required>
+            </div>
+            <button class="addCategoryBtn" type="submit">Create</button>
+            <p class="closeAddCategory">close</p>
+        </form>
+    </div>
+
+    <div class="innerBody">
+
+        <div class="topRow">
+            <div class="topRowLeft">
+                <p class="pageTitle">Categories</p>
+                <a class="homeLink" href="/">Home</a>
+            </div>
+            <div class="searchBar"></div>
+        </div>
+
+        <div class="categories">
+            <%categories.map(category=>{%>
+                <div class="category">
+                    <a href=<%=category.id %>>
+                        <div class="container">
+                            <div class="front"></div>
+                            <% if(category.itemsCount > 0){%>
+                                <div class="middle"></div>
+                            <%}%>
+                            <div class="back"></div>
+                        </div>
+                        <div class="containerRow">
+                            <div class="categoryText">
+                                <p class="categoryName"><%=category.name%></p>
+                                <% if(category.itemsCount == 0){%>
+                                    <p class="itemsCount">Empty</p>
+                                <%}else{%>
+                                    <p class="itemsCount"><%= category.itemsCount %> Items</p>%>
+                                <%}%>
+                            </div>
+                            <a href=<%='/edit/' + category.id %>>
+                                <img class="dots" src="dots.png">
+                            </a>
+                        </div>
+                    </a>
+                </div>
+            <%})%>
+            <div class="addCategory">
+                <div class="addCategoryImgDiv">
+                    <img class="addCategoryImg" src="add.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

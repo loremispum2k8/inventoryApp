@@ -6,7 +6,7 @@ require('dotenv').config()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,'PUBLIC')))
-app.set('views',path.join(__dirname,'VIEWS'))
+app.set('views',path.join(__dirname,'PUBLIC/VIEWS'))
 app.set('view engine','ejs')
 
 

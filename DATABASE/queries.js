@@ -5,6 +5,11 @@ async function getCategories(){
     return rows
 }
 
+async function getItemsCount(categoryId){
+    const {rows} = await pool.query('SELECT COUNT(*) FROM items WHERE category_id = $1',[categoryId])
+    return rows
+}
+
 async function getIndividualCategory(categoryId){
     const {rows} = await pool.query(`SELECT * FROM categories WHERE id = $1`,[categoryId])
     return rows
@@ -70,5 +75,6 @@ module.exports = {
     getItems,
     getIndividualItem,
     removeItem,
-    editItem
+    editItem,
+    getItemsCount
 }

@@ -4,7 +4,7 @@ const controls = require('../CONTROLLERS/controllers')
 
 indexRouter.get('/',controls.generateHomePage)
 
-indexRouter.post('/addCategory',controls.validateCategory,controls.addCategory)
+indexRouter.post('/addCategory',controls.addCategory)
 
 indexRouter.get('/:id',controls.viewCategory)
 

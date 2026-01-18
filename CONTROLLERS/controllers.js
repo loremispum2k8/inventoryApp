@@ -1,26 +1,18 @@
 const db = require('../DATABASE/queries')
-const { body, validationResult } = require('express-validator');
-const validateCategory = [
-    body('category')
-        .trim()
-        .notEmpty()
-        .withMessage('Category name cannot be empty'),
-]
 
 async function generateHomePage(req,res){
     const categories = await db.getCategories()
+    for(let category of categories){
+        const result = await db.getItemsCount(category.id)
+        category.itemsCount = result[0].count
+    }
     res.render('index',{categories,msg:''})
 }
 
 async function addCategory(req,res){
     const categories = await db.getCategories()
-    const errors = validationResult(req)
-    if(errors.isEmpty()){
-        await db.addCategory(req.body.category)
-        res.redirect('/')
-    }else{
-        res.render('index',{msg:errors.errors[0].msg,categories})
-    }
+    await db.addCategory(req.body.category)
+    res.redirect('/')
 }
 
 async function deleteCategory(req,res){
@@ -71,8 +63,6 @@ async function editItem(req,res){
 }
 
 module.exports = {
-    validateCategory,
-    
     viewCategory,
     addCategory,
     generateHomePage,
