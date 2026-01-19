@@ -290,7 +290,7 @@ body{
 
 
 .postItem{
-    display: none;
+    display: flex;
 }
 .items{
     padding: 20px 24px;
@@ -492,5 +492,28 @@ body{
     }
     to{
         transform: perspective(400px) scaleY(0.85) rotateX(-30deg);
+    }
+}
+
+
+@media screen and (max-width:500px){
+    body{
+        position: relative;
+        padding: 20px;
+        overflow: hidden;
+    }
+    .innerBody{
+        overflow: hidden;
+        position: relative;
+    }
+    .items{
+        height: 85dvh;
+        overflow-y: auto;
+        padding-bottom: 50px;
+    }
+    .categories{
+        height: 85dvh;
+        overflow-y: auto;
+        padding-bottom: 50px;
     }
 }
